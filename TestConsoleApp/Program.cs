@@ -6,16 +6,30 @@ namespace TestConsoleApp;
 
 public class RsaEncryption
 {
-	private static RSACryptoServiceProvider _csp;
+	private RSACryptoServiceProvider _csp;
 	private RSAParameters _privateKey;
 	private RSAParameters _publicKey;
 
-    public RsaEncryption()
-    {
+	public RsaEncryption()
+	{
 		_csp = new RSACryptoServiceProvider(2048);
 		_privateKey = _csp.ExportParameters(true);
 		_publicKey = _csp.ExportParameters(false);
-    }
+	}
+
+	public void SetPrivateKey(string privateKeyXml)
+	{
+		var sr = new StringReader(privateKeyXml);
+		var xs = new XmlSerializer(typeof(RSAParameters));
+		_privateKey = (RSAParameters)xs.Deserialize(sr);
+	}
+
+	public void SetPublicKey(string publicKeyXml)
+	{
+		var sr = new StringReader(publicKeyXml);
+		var xs = new XmlSerializer(typeof(RSAParameters));
+		_publicKey = (RSAParameters)xs.Deserialize(sr);
+	}
 
 	public string GetPublicKey()
 	{
@@ -56,6 +70,21 @@ internal class Program
 	static void Main(string[] args)
 	{
 		RsaEncryption rsa = new RsaEncryption();
+
+		Console.WriteLine("Use default keys? (y/n): ");
+		string choice = Console.ReadLine();
+
+		if (choice?.ToLower() == "n")
+		{
+			Console.WriteLine("Enter your public key XML: ");
+			string publicKeyXml = Console.ReadLine();
+			rsa.SetPublicKey(publicKeyXml);
+
+			Console.WriteLine("Enter your private key XML: ");
+			string privateKeyXml = Console.ReadLine();
+			rsa.SetPrivateKey(privateKeyXml);
+		}
+
 		string cypher = string.Empty;
 
 		Console.WriteLine($"Public key: {rsa.GetPublicKey()}\n");
