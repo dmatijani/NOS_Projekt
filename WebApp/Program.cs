@@ -1,11 +1,17 @@
-using WebApp.Data;
+using Application.Services;
+using Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<IAesKeyGenerator, AesKeyGenerator>();
+builder.Services.AddScoped<IAesService, AesService>();
+builder.Services.AddScoped<IRsaKeyGenerator, RsaKeyGenerator>();
+builder.Services.AddScoped<IRsaService, RsaService>();
+builder.Services.AddScoped<IHashService, HashService>();
+// TODO: add service for digital signature
 
 var app = builder.Build();
 
