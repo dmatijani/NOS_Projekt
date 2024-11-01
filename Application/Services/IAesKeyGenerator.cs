@@ -1,8 +1,6 @@
-﻿using Application.Models;
-
-namespace Application.Services;
+﻿namespace Application.Services;
 
 public interface IAesKeyGenerator
 {
-    public AesKeyIv GenerateKeyIv();
+    public string GenerateKey();
 }

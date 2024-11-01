@@ -2,5 +2,5 @@
 
 public interface IHashService
 {
-    public string ComputeHash(String value);
+    public string ComputeHash(string value);
 }

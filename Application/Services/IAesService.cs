@@ -1,10 +1,8 @@
-﻿using Application.Models;
-
-namespace Application.Services;
+﻿namespace Application.Services;
 
 public interface IAesService
 {
-    public string Encrypt(string value, AesKeyIv keyIv);
+    public string Encrypt(string value, string key);
 
-    public string Decrypt(string encryptedValue, AesKeyIv keyIv);
+    public string Decrypt(string encryptedValue, string key);
 }

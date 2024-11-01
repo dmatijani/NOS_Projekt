@@ -2,7 +2,7 @@
 
 public record RsaKeyPair
 {
-    string PublicKey { get; set; }
+    public string PublicKey { get; set; }
 
-    string PrivateKey { get; set; }
+    public string PrivateKey { get; set; }
 }

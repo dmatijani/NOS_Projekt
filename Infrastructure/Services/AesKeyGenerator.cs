@@ -1,12 +1,17 @@
-﻿using Application.Models;
-using Application.Services;
+﻿using Application.Services;
+using System.Security.Cryptography;
 
 namespace Infrastructure.Services;
 
 public class AesKeyGenerator : IAesKeyGenerator
 {
-    public AesKeyIv GenerateKeyIv()
+    public string GenerateKey()
     {
-        throw new NotImplementedException();
+        using (var aes = Aes.Create())
+        {
+            aes.KeySize = 256;
+            aes.GenerateKey();
+            return Convert.ToBase64String(aes.Key);
+        }
     }
 }

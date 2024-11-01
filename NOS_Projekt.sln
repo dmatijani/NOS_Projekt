@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsoleApp", "TestConso
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppLogic", "AppLogic", "{D5021063-621B-4F82-8732-E62E56DAACB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{F18752D3-8C03-4AC3-AEBD-C53E959C2462}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{F18752D3-8C03-4AC3-AEBD-C53E959C2462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{6CADAC9F-82B2-40CE-B854-0A369B5B47EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{6CADAC9F-82B2-40CE-B854-0A369B5B47EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{2A21657D-3BE6-4A26-B27A-A1247AE5596A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{6CADAC9F-82B2-40CE-B854-0A369B5B47EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CADAC9F-82B2-40CE-B854-0A369B5B47EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CADAC9F-82B2-40CE-B854-0A369B5B47EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A21657D-3BE6-4A26-B27A-A1247AE5596A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A21657D-3BE6-4A26-B27A-A1247AE5596A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A21657D-3BE6-4A26-B27A-A1247AE5596A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A21657D-3BE6-4A26-B27A-A1247AE5596A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
