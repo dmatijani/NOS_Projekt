@@ -6,14 +6,3 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-
-<button onclick="@(PreuzmiTekst())">Preuzmi tekst</button>
-
-@code {
-    [Inject]
-    private IFileService fileService { get; set; }
-
-    private async Task PreuzmiTekst() {
-        await fileService.DownloadText("tekst.txt", "Bok, ovo je tekst!");
-    }
-}
