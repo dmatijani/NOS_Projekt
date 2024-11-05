@@ -1,5 +1,6 @@
 using Application.Services;
 using Infrastructure.Services;
+using WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,8 @@ builder.Services.AddScoped<IAesService, AesService>();
 builder.Services.AddScoped<IRsaKeyGenerator, RsaKeyGenerator>();
 builder.Services.AddScoped<IRsaService, RsaService>();
 builder.Services.AddScoped<IHashService, HashService>();
-// TODO: add service for digital signature
+builder.Services.AddScoped<IDigitalSignatureService, DigitalSignatureService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 var app = builder.Build();
 
