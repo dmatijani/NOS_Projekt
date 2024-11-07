@@ -21,4 +21,20 @@ public class FileService : IFileService
     {
         await _jsRuntime.InvokeVoidAsync("Download", filename, content, contentType);
     }
+
+    public async Task<string> UploadText()
+    {
+        return await Upload("text/plain");
+    }
+
+    public async Task<string> Upload(string allowed)
+    {
+        try
+        {
+            return await _jsRuntime.InvokeAsync<string>("Upload", allowed);
+        } catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
 }
