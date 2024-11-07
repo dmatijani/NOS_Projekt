@@ -1,5 +1,6 @@
 using Application.Services;
 using Infrastructure.Services;
+using Microsoft.FluentUI.AspNetCore.Components;
 using WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,11 @@ builder.Services.AddScoped<IRsaService, RsaService>();
 builder.Services.AddScoped<IHashService, HashService>();
 builder.Services.AddScoped<IDigitalSignatureService, DigitalSignatureService>();
 builder.Services.AddScoped<IFileService, FileService>();
+
+builder.Services.AddHttpClient();
+
+// Fluent UI
+builder.Services.AddFluentUIComponents();
 
 var app = builder.Build();
 
