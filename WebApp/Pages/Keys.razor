@@ -5,7 +5,7 @@
 		<span>Ovdje možete generirati ključeve za algoritam simetričnog šifriranja AES i algoritam asimetričnog šifriranja RSA.</span>
 		<span>Generirani RSA ključevi također služe za digitalno potpisivanje.</span>
 		<FluentDivider Style="width: 100%;" />
-		<FluentCheckbox @bind-Value=@_instantDownload Label="Odmah spremi datoteke" />
+		<FluentCheckbox @bind-Value=@Global.InstantDownload Label="Odmah spremi datoteke" />
 		<FluentGrid Style="width: 100%;">
 			<FluentGridItem xs="6" md="5">
 				<h4>AES ključ</h4>
@@ -15,9 +15,9 @@
 					Generiraj
 				</FluentButton>
 				<FluentButton Appearance="Appearance.Lightweight"
-							  Disabled="@string.IsNullOrEmpty(_aesKey)"
+							  Disabled="@string.IsNullOrEmpty(Global.AesKey)"
 							  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
-							  OnClick="@(async () => await FileService.DownloadText("tajni_kljuc.txt", _aesKey))">
+							  OnClick="@(async () => await FileService.DownloadText("tajni_kljuc.txt", Global.AesKey))">
 					Spremi ključ
 				</FluentButton>
 			</FluentGridItem>
@@ -29,15 +29,15 @@
 					Generiraj
 				</FluentButton>
 				<FluentButton Appearance="Appearance.Lightweight"
-							  Disabled="@string.IsNullOrEmpty(_rsaPublicKey)"
+							  Disabled="@string.IsNullOrEmpty(Global.RsaPublicKey)"
 							  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
-							  OnClick="@(async () => await FileService.DownloadText("javni_kljuc.txt", _rsaPublicKey))">
+							  OnClick="@(async () => await FileService.DownloadText("javni_kljuc.txt", Global.RsaPublicKey))">
 					Spremi javni ključ
 				</FluentButton>
 				<FluentButton Appearance="Appearance.Lightweight"
-							  Disabled="@string.IsNullOrEmpty(_rsaPrivateKey)"
+							  Disabled="@string.IsNullOrEmpty(Global.RsaPrivateKey)"
 							  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
-							  OnClick="@(async () => await FileService.DownloadText("privatni_kljuc.txt", _rsaPrivateKey))">
+							  OnClick="@(async () => await FileService.DownloadText("privatni_kljuc.txt", Global.RsaPrivateKey))">
 					Spremi privatni ključ
 				</FluentButton>
 			</FluentGridItem>
@@ -48,13 +48,13 @@
 				<FluentTabs Style="width: 100%;">
 					<FluentTab Label="Tajni ključ">
 						<code>
-							@if (string.IsNullOrEmpty(_aesKey))
+							@if (string.IsNullOrEmpty(Global.AesKey))
 							{
 								<span>Ovdje će biti generiran AES tajni ključ.</span>
 							}
 							else
 							{
-								@_aesKey
+								@Global.AesKey
 							}
 						</code>
 					</FluentTab>
@@ -64,22 +64,22 @@
 				<FluentTabs Style="width: 100%;">
 					<FluentTab Label="Javni ključ" Style="width: 100%;">
 						<code>
-							@if (string.IsNullOrEmpty(_rsaPublicKey))
+							@if (string.IsNullOrEmpty(Global.RsaPublicKey))
 							{
 								<span>Ovdje će biti generiran RSA javni ključ.</span>
 							} else
 							{
-								@_rsaPublicKey
+								@Global.RsaPublicKey
 							}
 						</code>
 					</FluentTab>
 					<FluentTab Label="Privatni ključ" Style="width: 100%;">
 						<code>
-							@if (string.IsNullOrEmpty(_rsaPrivateKey)) {
+							@if (string.IsNullOrEmpty(Global.RsaPrivateKey)) {
 								<span>Ovdje će biti generiran RSA privatni ključ.</span>
 							} else
 							{
-								@_rsaPrivateKey
+								@Global.RsaPrivateKey
 							}
 						</code>
 					</FluentTab>

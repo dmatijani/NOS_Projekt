@@ -1,4 +1,5 @@
 using Microsoft.FluentUI.AspNetCore.Components;
+using WebApp;
 using WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddScoped<IRsaService, RsaService>();
 builder.Services.AddScoped<IHashService, HashService>();
 builder.Services.AddScoped<IDigitalSignatureService, DigitalSignatureService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddSingleton<Global>();
 
 builder.Services.AddHttpClient();
 

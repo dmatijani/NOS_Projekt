@@ -14,30 +14,27 @@ public partial class Keys
     [Inject]
     private IFileService FileService { get; set; }
 
-    private bool _instantDownload = true;
-
-    private string _aesKey = string.Empty;
-    private string _rsaPublicKey = string.Empty;
-    private string _rsaPrivateKey = string.Empty;
+    [Inject]
+    private Global Global { get; set; }
 
     private async Task GenerateAesKey()
     {
-        _aesKey = AesKeyGenerator.GenerateKey();
-        if (_instantDownload)
+        Global.AesKey = AesKeyGenerator.GenerateKey();
+        if (Global.InstantDownload)
         {
-			await FileService.DownloadText("tajni_kljuc.txt", _aesKey);
+			await FileService.DownloadText("tajni_kljuc.txt", Global.AesKey);
 		}
     }
     
     private async Task GenerateRsaKeys()
     {
         var _rsaKeys = RsaKeyGenerator.GenerateKeyPair();
-        _rsaPublicKey = _rsaKeys.PublicKey;
-        _rsaPrivateKey = _rsaKeys.PrivateKey;
-        if (_instantDownload)
+        Global.RsaPublicKey = _rsaKeys.PublicKey;
+        Global.RsaPrivateKey = _rsaKeys.PrivateKey;
+        if (Global.InstantDownload)
         {
-			await FileService.DownloadText("javni_kljuc.txt", _rsaPublicKey);
-			await FileService.DownloadText("privatni_kljuc.txt", _rsaPrivateKey);
+			await FileService.DownloadText("javni_kljuc.txt", Global.RsaPublicKey);
+			await FileService.DownloadText("privatni_kljuc.txt", Global.RsaPrivateKey);
 		}
     }
 }
