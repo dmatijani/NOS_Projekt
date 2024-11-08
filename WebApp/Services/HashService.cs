@@ -1,8 +1,7 @@
-﻿using Application.Services;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Infrastructure.Services;
+namespace WebApp.Services;
 
 public class HashService : IHashService
 {

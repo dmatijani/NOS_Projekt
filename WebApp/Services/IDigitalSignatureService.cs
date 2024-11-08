@@ -1,4 +1,4 @@
-﻿namespace Application.Services;
+﻿namespace WebApp.Services;
 
 public interface IDigitalSignatureService
 {

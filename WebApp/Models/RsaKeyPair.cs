@@ -1,4 +1,4 @@
-﻿namespace Application.Models;
+﻿namespace WebApp.Models;
 
 public record RsaKeyPair
 {

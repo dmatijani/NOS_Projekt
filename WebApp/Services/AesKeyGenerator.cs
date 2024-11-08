@@ -1,7 +1,6 @@
-﻿using Application.Services;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
-namespace Infrastructure.Services;
+namespace WebApp.Services;
 
 public class AesKeyGenerator : IAesKeyGenerator
 {

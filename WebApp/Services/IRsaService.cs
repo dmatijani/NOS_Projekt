@@ -1,6 +1,6 @@
-﻿namespace Application.Services;
+﻿namespace WebApp.Services;
 
-public interface IAesService
+public interface IRsaService
 {
     public string Encrypt(string value, string key);
 

@@ -1,8 +1,7 @@
-﻿using Application.Models;
-using Application.Services;
+﻿using WebApp.Models;
 using System.Security.Cryptography;
 
-namespace Infrastructure.Services;
+namespace WebApp.Services;
 
 public class RsaKeyGenerator : IRsaKeyGenerator
 {

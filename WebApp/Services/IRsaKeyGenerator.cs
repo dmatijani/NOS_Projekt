@@ -1,6 +1,6 @@
-﻿using Application.Models;
+﻿using WebApp.Models;
 
-namespace Application.Services;
+namespace WebApp.Services;
 
 public interface IRsaKeyGenerator
 {
