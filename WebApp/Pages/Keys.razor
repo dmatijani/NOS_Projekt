@@ -1,3 +1,90 @@
 ﻿@page "/Kljucevi"
 
-<PageTitle>Stvaranje i pohranjivanje ključeva</PageTitle>
+<PageComponent Title="Stvaranje ključeva">
+	<FluentStack Orientation="Orientation.Vertical">
+		<span>Ovdje možete generirati ključeve za algoritam simetričnog šifriranja AES i algoritam asimetričnog šifriranja RSA.</span>
+		<span>Generirani RSA ključevi također služe za digitalno potpisivanje.</span>
+		<FluentDivider Style="width: 100%;" />
+		<FluentCheckbox @bind-Value=@_instantDownload Label="Odmah spremi datoteke" />
+		<FluentGrid Style="width: 100%;">
+			<FluentGridItem xs="6" md="5">
+				<h4>AES ključ</h4>
+				<FluentButton Appearance="Appearance.Accent"
+							  IconStart="@(new Icons.Regular.Size16.AddCircle())"
+							  OnClick="@(async () => await GenerateAesKey())">
+					Generiraj
+				</FluentButton>
+				<FluentButton Appearance="Appearance.Lightweight"
+							  Disabled="@string.IsNullOrEmpty(_aesKey)"
+							  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
+							  OnClick="@(async () => await FileService.DownloadText("tajni_kljuc.txt", _aesKey))">
+					Spremi ključ
+				</FluentButton>
+			</FluentGridItem>
+			<FluentGridItem xs="6" md="5">
+				<h4>RSA ključ</h4>
+				<FluentButton Appearance="Appearance.Accent"
+							  IconStart="@(new Icons.Regular.Size16.AddCircle())"
+							  OnClick="@(async () => await GenerateRsaKeys())">
+					Generiraj
+				</FluentButton>
+				<FluentButton Appearance="Appearance.Lightweight"
+							  Disabled="@string.IsNullOrEmpty(_rsaPublicKey)"
+							  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
+							  OnClick="@(async () => await FileService.DownloadText("javni_kljuc.txt", _rsaPublicKey))">
+					Spremi javni ključ
+				</FluentButton>
+				<FluentButton Appearance="Appearance.Lightweight"
+							  Disabled="@string.IsNullOrEmpty(_rsaPrivateKey)"
+							  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
+							  OnClick="@(async () => await FileService.DownloadText("privatni_kljuc.txt", _rsaPrivateKey))">
+					Spremi privatni ključ
+				</FluentButton>
+			</FluentGridItem>
+		</FluentGrid>
+		<FluentDivider Style="width: 100%;" />
+		<FluentGrid Style="width: 100%;">
+			<FluentGridItem xs="6" md="5">
+				<FluentTabs Style="width: 100%;">
+					<FluentTab Label="Tajni ključ">
+						<code>
+							@if (string.IsNullOrEmpty(_aesKey))
+							{
+								<span>Ovdje će biti generiran AES tajni ključ.</span>
+							}
+							else
+							{
+								@_aesKey
+							}
+						</code>
+					</FluentTab>
+				</FluentTabs>
+			</FluentGridItem>
+			<FluentGridItem xs="6" md="5">
+				<FluentTabs Style="width: 100%;">
+					<FluentTab Label="Javni ključ" Style="width: 100%;">
+						<code>
+							@if (string.IsNullOrEmpty(_rsaPublicKey))
+							{
+								<span>Ovdje će biti generiran RSA javni ključ.</span>
+							} else
+							{
+								@_rsaPublicKey
+							}
+						</code>
+					</FluentTab>
+					<FluentTab Label="Privatni ključ" Style="width: 100%;">
+						<code>
+							@if (string.IsNullOrEmpty(_rsaPrivateKey)) {
+								<span>Ovdje će biti generiran RSA privatni ključ.</span>
+							} else
+							{
+								@_rsaPrivateKey
+							}
+						</code>
+					</FluentTab>
+				</FluentTabs>
+			</FluentGridItem>
+		</FluentGrid>
+	</FluentStack>
+</PageComponent>
