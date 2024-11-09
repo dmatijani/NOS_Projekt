@@ -23,15 +23,15 @@ public partial class EncryptionAndDecryption
 		set => Global.InstantDownload = value;
 	}
 
-	private string _aesKey { get; set; } = string.Empty;
-	private string _aesPlaintextFile { get; set; } = string.Empty;
-	private string _aesEncryptedFile { get; set; } = string.Empty;
-	private string _rsaPublicKey { get; set; } = string.Empty;
-	private string _rsaPlaintextFile { get; set; } = string.Empty;
-	private string _rsaPrivateKey { get; set; } = string.Empty;
-	private string _rsaEncryptedFile { get; set; } = string.Empty;
-	private string _result { get; set; } = string.Empty;
-	private string _error { get; set; } = string.Empty;
+	private string _aesKey = string.Empty;
+	private string _aesPlaintextFile = string.Empty;
+	private string _aesEncryptedFile = string.Empty;
+	private string _rsaPublicKey = string.Empty;
+	private string _rsaPlaintextFile = string.Empty;
+	private string _rsaPrivateKey = string.Empty;
+	private string _rsaEncryptedFile = string.Empty;
+	private string _result = string.Empty;
+	private string _error = string.Empty;
 
 	public async Task AesEncrypt()
 	{

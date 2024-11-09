@@ -1,3 +1,45 @@
 ﻿@page "/IzracunavanjeSazetka"
 
-<PageTitle>Izračunavanje sažetka</PageTitle>
+<PageComponent Title="Izračunavanje sažetka">
+	<FluentStack Orientation="Orientation.Vertical">
+		<span>Ovdje je moguće izračunati sažetak prenesene datoteke koristeći algoritam SHA512.</span>
+		<FluentDivider Style="width: 100%;" />
+		<FluentCheckbox @bind-Value=@_instantDownload Label="Odmah spremi datoteku" />
+		<h4>SHA512 izračunavanje sažetka</h4>
+		<FluentDivider Style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;" />
+		<FluentGrid Style="width: 100%;">
+			<FluentGridItem xs="6">
+				<FluentGrid Style="width: 100%;">
+					<FluentGridItem xs="12">
+						<FluentButton Appearance="Appearance.Lightweight"
+									  IconStart="@(new Icons.Regular.Size16.ArrowUpload())"
+									  OnClick="@(async () => await UploadFile())">
+							Prenesi datoteku
+						</FluentButton>
+					</FluentGridItem>
+					<FluentGridItem xs="12">
+						<code>
+							@if (string.IsNullOrEmpty(_plaintextFile))
+							{
+								<span>Ovdje će se pojaviti sadržaj datoteke.</span>
+							}
+							else
+							{
+								@_plaintextFile
+							}
+						</code>
+					</FluentGridItem>
+				</FluentGrid>
+			</FluentGridItem>
+			<FluentGridItem xs="6">
+				<ResultView ButtonText="Izračunaj sažetak"
+							Action="@CalculateHash"
+							ActionEnabled="@(!string.IsNullOrEmpty(_plaintextFile))"
+							FileName="sazetak_datoteke.txt"
+							@bind-Result="@_result"
+							@bind-Error="@_error" />
+			</FluentGridItem>
+		</FluentGrid>
+		
+	</FluentStack>
+</PageComponent>
