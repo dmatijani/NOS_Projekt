@@ -1,4 +1,40 @@
-﻿@using WebApp.Services
+﻿@inject NavigationManager Navigation
+@using WebApp.Services
 @page "/"
 
-<PageTitle>Početna</PageTitle>
+<PageComponent Title="Početna">
+	<FluentGrid Style="width: 100%">
+		<FluentGridItem xs="3" lg="2">
+			<FluentButton Style="width: 100%; height: 100px;"
+						  Appearance="Appearance.Accent"
+						  IconStart="@(new Icons.Regular.Size24.Key())"
+						  OnClick="@(() => Navigation.NavigateTo("/Kljucevi"))">
+				Ključevi
+			</FluentButton>
+		</FluentGridItem>
+		<FluentGridItem xs="3" lg="2">
+			<FluentButton Style="width: 100%; height: 100px;"
+						  Appearance="Appearance.Accent"
+						  IconStart="@(new Icons.Regular.Size24.DocumentBriefcase())"
+						  OnClick="@(() => Navigation.NavigateTo("/EnkripcijaIDekripcija"))">
+				Kriptiranje i dekriptiranje
+			</FluentButton>
+		</FluentGridItem>
+		<FluentGridItem xs="3" lg="2">
+			<FluentButton Style="width: 100%; height: 100px;"
+						  Appearance="Appearance.Accent"
+						  IconStart="@(new Icons.Regular.Size24.DataFunnel())"
+						  OnClick="@(() => Navigation.NavigateTo("/IzracunavanjeSazetka"))">
+				Izračunavanje sažetka
+			</FluentButton>
+		</FluentGridItem>
+		<FluentGridItem xs="3" lg="2">
+			<FluentButton Style="width: 100%; height: 100px;"
+						  Appearance="Appearance.Accent"
+						  IconStart="@(new Icons.Regular.Size24.Signature())"
+						  OnClick="@(() => Navigation.NavigateTo("/DigitalniPotpis"))">
+				Digitalno potpisivanje
+			</FluentButton>
+		</FluentGridItem>
+	</FluentGrid>
+</PageComponent>

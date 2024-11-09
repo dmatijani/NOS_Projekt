@@ -76,3 +76,9 @@ code {
     background-color: #DBDBDB;
     color: black;
 }
+
+code > span {
+    color: #5080B0;
+    font-family: inherit;
+    font-size: 0.9em;
+}
