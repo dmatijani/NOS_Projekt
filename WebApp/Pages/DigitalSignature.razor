@@ -73,9 +73,15 @@
 					<FluentGridItem xs="12">
 						<FluentButton Appearance="Appearance.Accent"
 									  IconStart="@(new Icons.Regular.Size16.Signature())"
-									  Disabled="@(string.IsNullOrEmpty(_plaintextFile) || string.IsNullOrEmpty(_rsaPrivateKey) || string.IsNullOrEmpty(_digitalSignatureFile))"
+									  Disabled="@(string.IsNullOrEmpty(_plaintextFile) || string.IsNullOrEmpty(_rsaPublicKey) || string.IsNullOrEmpty(_digitalSignatureFile))"
 									  OnClick="@Verify">
 							Provjeri potpis
+						</FluentButton>
+						<FluentButton Appearance="Appearance.Lightweight"
+									  IconStart="@(new Icons.Regular.Size16.ArrowReply())"
+									  Disabled="@(string.IsNullOrEmpty(_error) && _verifyResult == null)"
+									  OnClick="@ClearResult">
+							Očisti
 						</FluentButton>
 					</FluentGridItem>
 					<FluentGridItem xs="12">
@@ -85,12 +91,12 @@
 						}
 						@if (_verifyResult == true)
 						{
-							<FluentMessageBar Title="Potpis je važeći" Intent="@MessageIntent.Success">
+							<FluentMessageBar Title="Potpis je važeći" Intent="@MessageIntent.Success" AllowDismiss="false">
 								Datoteka nije mijenjana.
 							</FluentMessageBar>
 						} else if (_verifyResult == false || !string.IsNullOrEmpty(_error))
 						{
-							<FluentMessageBar Title="@(!string.IsNullOrEmpty(_error) ? "Došlo je do greške" : "Potpis NIJE važeći")" Intent="@MessageIntent.Error">
+							<FluentMessageBar Title="@(!string.IsNullOrEmpty(_error) ? "Došlo je do greške" : "Potpis NIJE važeći")" Intent="@MessageIntent.Error" AllowDismiss="false">
 								@if (!string.IsNullOrEmpty(_error)) {
 									<span>@_error</span>
 								} else

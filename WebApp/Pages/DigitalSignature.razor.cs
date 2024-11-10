@@ -67,4 +67,10 @@ public partial class DigitalSignature
             _error = $"Greška: {ex.Message}";
         }
     }
+
+    public void ClearResult()
+    {
+        _error = string.Empty;
+        _verifyResult = null;
+    }
 }
