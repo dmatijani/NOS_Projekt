@@ -1,3 +1,107 @@
 ﻿@page "/DigitalniPotpis"
 
-<PageTitle>Digitalno potpisivanje</PageTitle>
+<PageComponent Title="Digitalno potpisivanje">
+	<FluentStack Orientation="Orientation.Vertical">
+		<span>Ovdje je moguće digitalno potpisati datoteku koristeći RSA privatni ključ i provjeriti potpis za neku datoteku koristeći RSA javni ključ.</span>
+		<FluentDivider Style="width: 100%;" />
+		<FluentCheckbox @bind-Value=@_instantDownload Label="Odmah spremi datoteku" />
+		<FluentGrid Style="width: 100%;">
+			<FluentGridItem xs="12">
+				<FluentButton Appearance="Appearance.Lightweight"
+							  IconStart="@(new Icons.Regular.Size16.ArrowUpload())"
+							  OnClick="@(async () => await UploadFile())">
+					Prenesi datoteku
+				</FluentButton>
+				<p style="margin-top: 1rem;">Prenesena datoteka: </p>
+				<code>
+					@if (string.IsNullOrEmpty(_plaintextFile))
+					{
+						<span>Ovdje će se pojaviti sadržaj datoteke.</span>
+					}
+					else
+					{
+						@_plaintextFile
+					}
+				</code>
+			</FluentGridItem>
+		</FluentGrid>
+		<FluentTabs Style="width: 100%;">
+			<FluentTab Label="Potpisivanje">
+				<h4>Potpisivanje</h4>
+				<FluentGrid Style="width: 100%;">
+					<FluentGridItem xs="6">
+						<FluentGrid Style="width: 100%;">
+							<FluentGridItem xs="12">
+								<FluentButton Appearance="Appearance.Lightweight"
+											  IconStart="@(new Icons.Regular.Size16.ArrowUpload())"
+											  OnClick="@(async () => await UploadRsaPrivateKey())">
+									Prenesi ključ
+								</FluentButton>
+							</FluentGridItem>
+							<FluentGridItem xs="12">
+								<code>
+									@if (string.IsNullOrEmpty(_rsaPrivateKey))
+									{
+										<span>Ovdje će se pojaviti sadržaj RSA privatnog ključa.</span>
+									}
+									else
+									{
+										@_rsaPrivateKey
+									}
+								</code>
+							</FluentGridItem>
+						</FluentGrid>
+					</FluentGridItem>
+					<FluentGridItem xs="6">
+						<ResultView ButtonText="Izračunaj potpis"
+									Action="@Sign"
+									ActionEnabled="@(!string.IsNullOrEmpty(_plaintextFile) && !string.IsNullOrEmpty(_rsaPrivateKey))"
+									FileName="digitalni_potpis.txt"
+									@bind-Result="@_signatureResult"
+									@bind-Error="@_error" />
+					</FluentGridItem>
+				</FluentGrid>
+			</FluentTab>
+			<FluentTab Label="Provjera potpisa">
+				<h4>Provjera potpisa</h4>
+				<FileAndKeyUpload @bind-Key=@(_rsaPublicKey)
+								  @bind-FileContent=@(_digitalSignatureFile)
+								  FileTitle="Digitalni potpis: "
+								  KeyTitle="RSA javni ključ: " />
+				<FluentDivider Style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;" />
+				<FluentGrid Style="width: 100%;">
+					<FluentGridItem xs="12">
+						<FluentButton Appearance="Appearance.Accent"
+									  IconStart="@(new Icons.Regular.Size16.Signature())"
+									  Disabled="@(string.IsNullOrEmpty(_plaintextFile) || string.IsNullOrEmpty(_rsaPrivateKey) || string.IsNullOrEmpty(_digitalSignatureFile))"
+									  OnClick="@Verify">
+							Provjeri potpis
+						</FluentButton>
+					</FluentGridItem>
+					<FluentGridItem xs="12">
+						@if (!string.IsNullOrEmpty(_error))
+						{
+							<p style="color: red;">@_error</p>
+						}
+						@if (_verifyResult == true)
+						{
+							<FluentMessageBar Title="Potpis je važeći" Intent="@MessageIntent.Success">
+								Datoteka nije mijenjana.
+							</FluentMessageBar>
+						} else if (_verifyResult == false || !string.IsNullOrEmpty(_error))
+						{
+							<FluentMessageBar Title="@(!string.IsNullOrEmpty(_error) ? "Došlo je do greške" : "Potpis NIJE važeći")" Intent="@MessageIntent.Error">
+								@if (!string.IsNullOrEmpty(_error)) {
+									<span>@_error</span>
+								} else
+								{
+									<span>Datoteka je mijenjana.</span>
+								}
+							</FluentMessageBar>
+						}
+					</FluentGridItem>
+				</FluentGrid>
+			</FluentTab>
+		</FluentTabs>
+	</FluentStack>
+</PageComponent>
