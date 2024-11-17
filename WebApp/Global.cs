@@ -1,8 +1,5 @@
 ﻿namespace WebApp;
 
-/// <summary>
-/// Klasa koja čuva informacije stalne u cijeloj aplikaciji
-/// </summary>
 public class Global
 {
 	public bool InstantDownload { get; set; }
