@@ -1,0 +1,38 @@
+﻿<FluentGrid Style="width: 100%;">
+	<FluentGridItem xs="6">
+		<FluentButton Appearance="Appearance.Lightweight"
+					  IconStart="@(new Icons.Regular.Size16.ArrowUpload())"
+					  OnClick="@(async () => await UploadFile())">
+			Prenesi datoteku
+		</FluentButton>
+		<p style="margin-top: 1rem;">@FileTitle</p>
+		<code>
+			@if (string.IsNullOrEmpty(FileContent))
+			{
+				<span>Ovdje će se pojaviti sadržaj datoteke.</span>
+			}
+			else
+			{
+				@FileContent
+			}
+		</code>
+	</FluentGridItem>
+	<FluentGridItem xs="6">
+		<FluentButton Appearance="Appearance.Lightweight"
+					  IconStart="@(new Icons.Regular.Size16.ArrowUpload())"
+					  OnClick="@(async () => await UploadKey())">
+			Prenesi ključ
+		</FluentButton>
+		<p style="margin-top: 1rem;">@KeyTitle</p>
+		<code>
+			@if (string.IsNullOrEmpty(Key))
+			{
+				<span>Ovdje će se pojaviti ključ.</span>
+			}
+			else
+			{
+				@Key
+			}
+		</code>
+	</FluentGridItem>
+</FluentGrid>

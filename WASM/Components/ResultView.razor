@@ -1,0 +1,38 @@
+﻿<FluentGrid Style="width: 100%;">
+	<FluentGridItem xs="12">
+		<FluentButton Appearance="Appearance.Accent"
+					  IconStart="@(new Icons.Regular.Size16.DocumentBulletList())"
+					  Disabled="@(!ActionEnabled)"
+					  OnClick="@Action">
+			@ButtonText
+		</FluentButton>
+		<FluentButton Appearance="Appearance.Lightweight"
+					  IconStart="@(new Icons.Regular.Size16.ArrowReply())"
+					  Disabled="@(string.IsNullOrEmpty(Result) && string.IsNullOrEmpty(Error))"
+					  OnClick="@(async () => await ClearResult())">
+			Očisti
+		</FluentButton>
+		<FluentButton Appearance="Appearance.Lightweight"
+					  IconStart="@(new Icons.Regular.Size16.ArrowDownload())"
+					  Disabled="@(string.IsNullOrEmpty(Result) || !string.IsNullOrEmpty(Error) || !ActionEnabled)"
+					  OnClick="@(async () => await SaveResult())">
+			Spremi datoteku
+		</FluentButton>
+	</FluentGridItem>
+	<FluentGridItem xs="12">
+		@if (!string.IsNullOrEmpty(Error))
+		{
+			<p style="color: red;">@Error</p>
+		}
+		<code>
+			@if (string.IsNullOrEmpty(Result))
+			{
+				<span>Ovdje će se pojaviti rezultat.</span>
+			}
+			else
+			{
+				@Result
+			}
+		</code>
+	</FluentGridItem>
+</FluentGrid>

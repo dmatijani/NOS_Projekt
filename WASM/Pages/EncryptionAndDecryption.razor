@@ -1,0 +1,67 @@
+﻿@page "/EnkripcijaIDekripcija"
+
+<PageComponent Title="Kriptiranje i dekriptiranje">
+	<FluentStack Orientation="Orientation.Vertical">
+		<span>Ovdje je moguće kriptirati i dekriptirati prenesene datoteke simetričnim i asimetričnim algoritmom, AES i RSA.</span>
+		<FluentDivider Style="width: 100%;" />
+		<FluentCheckbox @bind-Value=@_instantDownload Label="Odmah spremi datoteke" />
+		<FluentTabs Style="width: 100%">
+			<FluentTab Label="AES kriptiranje">
+				<h4>AES kriptiranje</h4>
+				<FileAndKeyUpload @bind-Key="@_aesKey"
+								  @bind-FileContent="@_aesPlaintextFile"
+								  FileTitle="Izvorna datoteka: "
+								  KeyTitle="AES tajni ključ: " />
+				<FluentDivider Style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;" />
+				<ResultView ButtonText="Kriptiraj datoteku"
+							Action="@AesEncrypt"
+							ActionEnabled="@(!string.IsNullOrEmpty(_aesPlaintextFile) && !string.IsNullOrEmpty(_aesKey))"
+							FileName="aes_kriptirana.txt"
+							@bind-Result="@_result"
+							@bind-Error="@_error" />
+			</FluentTab>
+			<FluentTab Label="AES dekriptiranje">
+				<h4>AES dekriptiranje</h4>
+				<FileAndKeyUpload @bind-Key="@_aesKey"
+								  @bind-FileContent="@_aesEncryptedFile"
+								  FileTitle="AES kriptirana datoteka: "
+								  KeyTitle="AES tajni ključ: " />
+				<FluentDivider Style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;" />
+				<ResultView ButtonText="Dekriptiraj datoteku"
+							Action="@AesDecrypt"
+							ActionEnabled="@(!string.IsNullOrEmpty(_aesEncryptedFile) && !string.IsNullOrEmpty(_aesKey))"
+							FileName="aes_dekriptirana.txt"
+							@bind-Result="@_result"
+							@bind-Error="@_error" />
+			</FluentTab>
+			<FluentTab Label="RSA kriptiranje">
+				<h4>RSA kriptiranje</h4>
+				<FileAndKeyUpload @bind-Key="@_rsaPublicKey"
+								  @bind-FileContent="@_rsaPlaintextFile"
+								  FileTitle="Izvorna datoteka: "
+								  KeyTitle="RSA javni ključ: " />
+				<FluentDivider Style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;" />
+				<ResultView ButtonText="Kriptiraj datoteku"
+							Action="@RsaEncrypt"
+							ActionEnabled="@(!string.IsNullOrEmpty(_rsaPlaintextFile) && !string.IsNullOrEmpty(_rsaPublicKey))"
+							FileName="rsa_kriptirana.txt"
+							@bind-Result="@_result"
+							@bind-Error="@_error" />
+			</FluentTab>
+			<FluentTab Label="RSA dekriptiranje">
+				<h4>RSA dekriptiranje</h4>
+				<FileAndKeyUpload @bind-Key="@_rsaPrivateKey"
+								  @bind-FileContent="@_rsaEncryptedFile"
+								  FileTitle="RSA kriptirana datoteka: "
+								  KeyTitle="RSA privatni ključ: " />
+				<FluentDivider Style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;" />
+				<ResultView ButtonText="Dekriptiraj datoteku"
+							Action="@RsaDecrypt"
+							ActionEnabled="@(!string.IsNullOrEmpty(_rsaEncryptedFile) && !string.IsNullOrEmpty(_rsaPrivateKey))"
+							FileName="rsa_dekriptirana.txt"
+							@bind-Result="@_result"
+							@bind-Error="@_error" />
+			</FluentTab>
+		</FluentTabs>
+	</FluentStack>
+</PageComponent>
